@@ -10,6 +10,7 @@ before_install:
   - haxelib install pdiff-hx 
   - haxelib install tink_macros 
   - haxelib install utest
+  - haxelib install format
   - sudo apt-get install subversion
   - sudo apt-get install xsltproc
 
