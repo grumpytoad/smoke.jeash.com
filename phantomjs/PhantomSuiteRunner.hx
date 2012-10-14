@@ -25,7 +25,7 @@ class PhantomSuiteRunner {
 	static var phantom:Phantom #if !macro = untyped window.phantom #end;
 	static var TMP_PATH = "/tmp";
 	static var BASE_URL = "http://smoke.jeash.com/";
-	static var ROOT_PATH = "/var/www/smoke.jeash.com";
+	static var ROOT_PATH = PhantomSuiteRunner.rootPath();
 	static var COMPARE_URL = "http://smoke.jeash.com/phantomjs/CompareImages.html";
 	static var WAIT_BEFORE_SNAPSHOT = 40;
 	static var DELAY_WAIT_BEFORE_SNAPSHOT = Math.ceil(WAIT_BEFORE_SNAPSHOT * 1.2);
@@ -126,6 +126,12 @@ class PhantomSuiteRunner {
 		//haxe.Timer.delay(Assert.createAsync( function () page.sendEvent(eventType, coords[0], coords[1]), 10), 5);
 		page.sendEvent(eventType, coords[0], coords[1]);
 //#if js haxe.Timer.delay(Assert.createAsync( function () {}, 500), 100); #end
+#end
+	}
+
+	@:macro public static function rootPath() {
+#if neko
+		return sys.FileSystem.fullPath(Sys.getCwd() + "/../").toExpr();
 #end
 	}
 
