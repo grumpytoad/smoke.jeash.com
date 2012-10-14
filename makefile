@@ -11,9 +11,17 @@ misc/main.js: Main.hx
 text/main.js: Main.hx
 	haxe -js text/main.js -cp ../jeash/ --remap flash:jeash -main Main.hx
 
+clean:
+	make clean -C display
+	make clean -C events
+	make clean -C net
+
 all:
-	make clean all -C display
-	make clean all -C events
-	make clean all -C net
+	make all -C display
+	make all -C events
+	make all -C net
 	make -C utils
 	make -C zjnue/jeash-rotate-scroll
+
+test:
+	make -C phantomjs
