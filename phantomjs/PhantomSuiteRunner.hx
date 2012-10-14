@@ -7,6 +7,7 @@ import haxe.macro.Context;
 
 import utest.Assert;
 import utest.Runner;
+import utest.TestResult;
 import utest.ui.text.PrintReport;
 
 using haxe.io.Path;
@@ -40,6 +41,8 @@ class PhantomSuiteRunner {
 		runner.addCase(Type.createEmptyInstance(PhantomTestCase));
 		new PrintReport(runner);
 		runner.run();
+		var returnCode = 0;
+		runner.onProgress.add(function (progress: { result : TestResult, done : Int, totals : Int }) if (!progress.result.allOk()) returnCode = 1);
 		runner.onComplete.add(function (_) phantom.exit(0));
 	}
 
