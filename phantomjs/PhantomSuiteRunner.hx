@@ -24,9 +24,9 @@ using StringTools;
 class PhantomSuiteRunner {
 	static var phantom:Phantom #if !macro = untyped window.phantom #end;
 	static var TMP_PATH = "/tmp";
-	static var BASE_URL = "http://smoke.jeash.com/";
+	static var BASE_URL = "http://localhost:3001/";
 	static var ROOT_PATH = PhantomSuiteRunner.rootPath();
-	static var COMPARE_URL = "http://smoke.jeash.com/phantomjs/CompareImages.html";
+	static var COMPARE_URL = "phantomjs/CompareImages.html";
 	static var WAIT_BEFORE_SNAPSHOT = 40;
 	static var DELAY_WAIT_BEFORE_SNAPSHOT = Math.ceil(WAIT_BEFORE_SNAPSHOT * 1.2);
 		
@@ -103,8 +103,8 @@ class PhantomSuiteRunner {
 #if js
 			var compareFileName = "/" + imageFileName.withoutDirectory().withoutExtension() + "_compare.png";
 			page.render(ROOT_PATH + imageFileName.directory() + compareFileName);
-			trace(COMPARE_URL + "?expected=" + imageFileName + "&actual=" + imageFileName.directory() + compareFileName);
-			page.open(COMPARE_URL + "?expected=" + imageFileName + "&actual=" + imageFileName.directory() + compareFileName, executeAfterPageLoad( Assert.createAsync( function () Assert.isTrue(page.evaluate(function () return untyped window.phantomTestResult)), 5000) ));
+			trace(BASE_URL + COMPARE_URL + "?expected=" + imageFileName + "&actual=" + imageFileName.directory() + compareFileName);
+			page.open(BASE_URL + COMPARE_URL + "?expected=" + imageFileName + "&actual=" + imageFileName.directory() + compareFileName, executeAfterPageLoad( Assert.createAsync( function () Assert.isTrue(page.evaluate(function () return untyped window.phantomTestResult)), 5000) ));
 #end
 	}
 

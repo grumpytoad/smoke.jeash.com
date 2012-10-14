@@ -20,7 +20,7 @@ class PostUrl extends Sprite {
 
 		configureListeners(loader);
 
-		var request:URLRequest = new URLRequest("http://smoke.jeash.com/node");
+		var request:URLRequest = new URLRequest("/");
 
 		var variables : URLVariables = new URLVariables();  
 		variables.foo = "bar";  

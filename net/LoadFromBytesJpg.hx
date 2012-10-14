@@ -15,7 +15,7 @@ class LoadFromBytesJpg {
 		var loader:URLLoader = new URLLoader();
 		configureListeners(loader);
 
-		var request:URLRequest = new URLRequest("http://smoke.jeash.com/node/jpg");
+		var request:URLRequest = new URLRequest("/net/space.jpg");
 
 		loader.dataFormat = URLLoaderDataFormat.BINARY;
 

@@ -15,7 +15,7 @@ class GetUrlBinary {
 		var loader:URLLoader = new URLLoader();
 		configureListeners(loader);
 
-		var request:URLRequest = new URLRequest("http://smoke.jeash.com/node/png");
+		var request:URLRequest = new URLRequest("/net/enemy.png");
 
 		loader.dataFormat = URLLoaderDataFormat.BINARY;
 
