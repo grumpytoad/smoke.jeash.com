@@ -21,19 +21,24 @@ class CompareImages {
 	static var expectedCanvas : Dynamic;
 	static var expectedDrawn = false;
 	static function onLoadExpected(e) untyped {
+		console.log("expected image arrived");
 		expectedCanvas = document.createElement("canvas");
 		var ctx = expectedCanvas.getContext("2d");
 		ctx.drawImage(e.target, 0, 0);
 		expectedDrawn = true;
+		console.log("expected canvas created");
 		if (actualDrawn) compareCanvases(expectedCanvas, actualCanvas);
 	}
 
 	static var actualCanvas : Dynamic;
 	static var actualDrawn = false;
 	static function onLoadActual(e) untyped {
+		console.log("actual image arrived");
 		actualCanvas = document.createElement("canvas");
 		var ctx = actualCanvas.getContext("2d");
 		ctx.drawImage(e.target, 0, 0);
+		actualDrawn = true;
+		console.log("actual canvas created");
 		if (expectedDrawn) compareCanvases(expectedCanvas, actualCanvas);
 	}
 
@@ -50,9 +55,13 @@ class CompareImages {
 	}
 
 	static function compareCanvases (expectedImg, actualImg) untyped {
+		console.log("starting perceptualdiff");
 		var pdiff = new PerceptualDiff({
 			thresholdPixels : 20,
 		});
+		console.log("comparing images");
+		var res = pdiff.compare(toRGBAImg(expectedImg.getContext("2d").getImageData(0, 0, expectedImg.width, expectedImg.height)), toRGBAImg(actualImg.getContext("2d").getImageData(0, 0, actualImg.width, actualImg.height)));
+		console.log("compared images: " + res);
 		var res = pdiff.compare(toRGBAImg(expectedImg.getContext("2d").getImageData(0, 0, expectedImg.width, expectedImg.height)), toRGBAImg(actualImg.getContext("2d").getImageData(0, 0, actualImg.width, actualImg.height)));
 		if (!res)
 			window.console.log("Pixels failed: " + (pdiff.pixelsFailed / (expectedImg.width * expectedImg.height) * 100) + "%");
