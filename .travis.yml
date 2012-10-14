@@ -17,6 +17,7 @@ before_install:
 before_script:
   - svn co http://nekonme.googlecode.com/svn/trunk/ ../jeash
   - make clean all
+  - "node webserver.js &"
 
 script:
   - make test
