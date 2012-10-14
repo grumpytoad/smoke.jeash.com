@@ -18,12 +18,12 @@
 -D jeash
 --remap flash:jeash
 
---next
+#--next
 
 # flash
--cp src
--cp ../../src
--cp ../../../lib/nme/2,0,1
--main Test
--swf bin_swf/Test.swf
--swf-version 10
+#-cp src
+#-cp ../../src
+#-cp ../../../lib/nme/2,0,1
+#-main Test
+#-swf bin_swf/Test.swf
+#-swf-version 10

@@ -1,5 +1,3 @@
-build: mkdir
+build: 
 	haxe build.hxml
 
-mkdir:
-	mkdir -p bin_swf
