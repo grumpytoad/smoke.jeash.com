@@ -91,7 +91,6 @@ class PhantomSuiteRunner {
 	public static function boolTest() return function (page) boolTestPage(page)
 	public static function boolTestPage(page: WebPage) {
 #if js
-		//haxe.Timer.delay(Assert.createAsync( function () Assert.isTrue(page.evaluate(function () return untyped window.phantomTestResult)), DELAY_WAIT_BEFORE_SNAPSHOT), WAIT_BEFORE_SNAPSHOT);
 		Assert.isTrue(page.evaluate(function () return untyped window.phantomTestResult));
 #end
 	}
@@ -102,12 +101,10 @@ class PhantomSuiteRunner {
 	public static function imageTest(imageFileName: String) return function (page) imageTestPage(page, imageFileName)
 	public static function imageTestPage(page: WebPage, imageFileName: String) {
 #if js
-		//haxe.Timer.delay(Assert.createAsync( function () {
 			var compareFileName = "/" + imageFileName.withoutDirectory().withoutExtension() + "_compare.png";
 			page.render(ROOT_PATH + imageFileName.directory() + compareFileName);
 			trace(COMPARE_URL + "?expected=" + imageFileName + "&actual=" + imageFileName.directory() + compareFileName);
 			page.open(COMPARE_URL + "?expected=" + imageFileName + "&actual=" + imageFileName.directory() + compareFileName, executeAfterPageLoad( Assert.createAsync( function () Assert.isTrue(page.evaluate(function () return untyped window.phantomTestResult)), 5000) ));
-		//}, 5000), WAIT_BEFORE_SNAPSHOT);
 #end
 	}
 
@@ -115,7 +112,6 @@ class PhantomSuiteRunner {
 	public static function imageDumpPage(page: WebPage, imageFileName: String) {
 #if js
 		page.render(ROOT_PATH + imageFileName);
-		//haxe.Timer.delay(Assert.createAsync( function () page.render(ROOT_PATH + imageFileName), DELAY_WAIT_BEFORE_SNAPSHOT), WAIT_BEFORE_SNAPSHOT);
 #end
 	}
 
@@ -123,9 +119,7 @@ class PhantomSuiteRunner {
 	public static function sendEventPage(page: WebPage, eventType: String, coords: Array<Int>) {
 		trace("sending event " + eventType + " to page at x,y = " + coords);
 #if js
-		//haxe.Timer.delay(Assert.createAsync( function () page.sendEvent(eventType, coords[0], coords[1]), 10), 5);
 		page.sendEvent(eventType, coords[0], coords[1]);
-//#if js haxe.Timer.delay(Assert.createAsync( function () {}, 500), 100); #end
 #end
 	}
 
