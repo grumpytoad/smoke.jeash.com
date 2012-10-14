@@ -1,4 +1,4 @@
 {
 	"testType" : "IMAGE",
-	"target" : "./bin"
+	"target" : "./bin/index.html"
 }
