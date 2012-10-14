@@ -27,8 +27,9 @@ class PhantomSuiteRunner {
 	static var BASE_URL = "http://localhost:3001/";
 	static var ROOT_PATH = PhantomSuiteRunner.rootPath();
 	static var COMPARE_URL = "phantomjs/CompareImages.html";
-	static var WAIT_BEFORE_SNAPSHOT = 40;
-	static var DELAY_WAIT_BEFORE_SNAPSHOT = Math.ceil(WAIT_BEFORE_SNAPSHOT * 1.2);
+	static var WAIT_BEFORE_SNAPSHOT = 120;
+	static var ASYNC_WAIT = 12000;
+	static var DELAY_WAIT_BEFORE_SNAPSHOT = Math.ceil(WAIT_BEFORE_SNAPSHOT * 2.0);
 		
 	static function main () {
 		haxe.Log.trace = function (msg:String, ?pos:PosInfos) {
@@ -66,11 +67,11 @@ class PhantomSuiteRunner {
 		var async = Assert.createAsync( function () { 
 			var delay = WAIT_BEFORE_SNAPSHOT;
 			for (cb in cbs) {
-#if js haxe.Timer.delay(Assert.createAsync(function () cb(page), Math.ceil(delay * 1.2)), delay); #end
+				#if js haxe.Timer.delay(Assert.createAsync(function () cb(page), Math.ceil(delay * 2.0)), delay); #end
 				delay += WAIT_BEFORE_SNAPSHOT;
 			}
 			trace("-- done -- " + address); 
-		}, 5000 );
+		}, ASYNC_WAIT );
 
 		trace("Loading ${address}".format());
 		page.open(address, executeAfterPageLoad(async));	
@@ -104,7 +105,7 @@ class PhantomSuiteRunner {
 			var compareFileName = "/" + imageFileName.withoutDirectory().withoutExtension() + "_compare.png";
 			page.render(ROOT_PATH + imageFileName.directory() + compareFileName);
 			trace(BASE_URL + COMPARE_URL + "?expected=" + imageFileName + "&actual=" + imageFileName.directory() + compareFileName);
-			page.open(BASE_URL + COMPARE_URL + "?expected=" + imageFileName + "&actual=" + imageFileName.directory() + compareFileName, executeAfterPageLoad( Assert.createAsync( function () Assert.isTrue(page.evaluate(function () return untyped window.phantomTestResult)), 5000) ));
+			page.open(BASE_URL + COMPARE_URL + "?expected=" + imageFileName + "&actual=" + imageFileName.directory() + compareFileName, executeAfterPageLoad( Assert.createAsync( function () Assert.isTrue(page.evaluate(function () return untyped window.phantomTestResult)), ASYNC_WAIT) ));
 #end
 	}
 
