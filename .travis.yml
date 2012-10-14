@@ -10,6 +10,7 @@ before_install:
   - haxelib install pdiff-hx 
   - haxelib install tink_macros 
   - haxelib install utest
+  - sudo apt-get install subversion
 
 before_script:
   - svn co http://nekonme.googlecode.com/svn/trunk/ ../jeash
