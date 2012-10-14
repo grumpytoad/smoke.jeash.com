@@ -43,7 +43,7 @@ class PhantomSuiteRunner {
 		runner.run();
 		var returnCode = 0;
 		runner.onProgress.add(function (progress: { result : TestResult, done : Int, totals : Int }) if (!progress.result.allOk()) returnCode = 1);
-		runner.onComplete.add(function (_) phantom.exit(0));
+		runner.onComplete.add(function (_) phantom.exit(returnCode));
 	}
 
 	public static function loadPage(address: String, cbs: Array<WebPage -> Void>) {
