@@ -28,8 +28,8 @@ class PhantomSuiteRunner {
 	static var BASE_URL = "http://localhost:3001/";
 	static var ROOT_PATH = PhantomSuiteRunner.rootPath();
 	static var COMPARE_URL = "phantomjs/CompareImages.html";
-	static var WAIT_BEFORE_SNAPSHOT = 240;
-	static var ASYNC_WAIT = 24000;
+	static var WAIT_BEFORE_SNAPSHOT = 120;
+	static var ASYNC_WAIT = 12000;
 	static var DELAY_WAIT_BEFORE_SNAPSHOT = Math.ceil(WAIT_BEFORE_SNAPSHOT * 2.0);
 		
 	static function main () {
