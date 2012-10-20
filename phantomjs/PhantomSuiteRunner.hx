@@ -30,7 +30,7 @@ class PhantomSuiteRunner {
 	static var COMPARE_URL = "phantomjs/CompareImages.html";
 	static var WAIT_BEFORE_SNAPSHOT = 120;
 	static var ASYNC_WAIT = 12000;
-	static var DELAY_WAIT_BEFORE_SNAPSHOT = Math.ceil(WAIT_BEFORE_SNAPSHOT * 4.0);
+	static var DELAY_WAIT_BEFORE_SNAPSHOT = Math.ceil(WAIT_BEFORE_SNAPSHOT * 2.0);
 		
 	static function main () {
 		haxe.Log.trace = function (msg:String, ?pos:PosInfos) {
