@@ -22,6 +22,7 @@ all:
 	make all -C net
 	make -C utils
 	make -C zjnue/jeash-rotate-scroll
+	make -C zjnue/scrolltest
 
 test:
 	make -C phantomjs
