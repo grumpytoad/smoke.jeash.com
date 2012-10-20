@@ -55,7 +55,6 @@ class CompareImages {
 			thresholdPixels : 20,
 		});
 		var res = pdiff.compare(toRGBAImg(expectedImg.getContext("2d").getImageData(0, 0, expectedImg.width, expectedImg.height)), toRGBAImg(actualImg.getContext("2d").getImageData(0, 0, actualImg.width, actualImg.height)));
-		var res = pdiff.compare(toRGBAImg(expectedImg.getContext("2d").getImageData(0, 0, expectedImg.width, expectedImg.height)), toRGBAImg(actualImg.getContext("2d").getImageData(0, 0, actualImg.width, actualImg.height)));
 		if (!res)
 			window.console.log("Pixels failed: " + (pdiff.pixelsFailed / (expectedImg.width * expectedImg.height) * 100) + "%");
 		window.phantomTestResult = res;
